@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">JetPackCompose</string>
+    <string name="config">Configuraciones</string>
+
+
+    <string name="notifications">Configuraciones</string>
+    <string name="password">Contraseña</string>
+    <string name="update">Actualizacion de datos</string>
+    <string name="generales">Generales</string>
+
+    <string name="metodo">Metodo de ingreso automático</string>
+    <string name="login">Login automatico</string>
+
+    <string name="finger_face">Configuraciones Huella/Rostro</string>
+
+
+
+
+
+
+</resources>
