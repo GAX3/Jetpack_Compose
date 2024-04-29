@@ -2,6 +2,7 @@
 
 package com.example.jetpackcompose
 
+import android.annotation.SuppressLint
 import com.example.jetpackcompose.ui.theme.*
 import android.content.res.Configuration
 import android.os.Bundle
@@ -32,13 +33,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CardColors
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
+
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
@@ -56,6 +51,17 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Composable
+fun MyApp() {
+    Scaffold(
+        content = {
+            BarkHomeContent()
+        }
+    )
 }
 
 @Preview()
@@ -93,7 +99,7 @@ fun CenterAlignedTopAppBarExample() {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        mToast(mContext, "Back")
+                        //mToast(mContext, "Back")
                     }) {
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowLeft,
@@ -120,113 +126,8 @@ fun CenterAlignedTopAppBarExample() {
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)){
             Column {
-                TextOptions(stringResource(R.string.generales))
-                CardDemo(stringResource(R.string.notifications),1)
-                CardDemo(stringResource(R.string.password), 1)
-                CardDemo(stringResource(R.string.update), 1)
-                Spacer(modifier = Modifier.height(20.dp))
-
-                TextOptions(stringResource(R.string.metodo))
-                CardDemo(stringResource(R.string.login), 0)
-                CardDemo(stringResource(R.string.password),1)
-                CardDemo(stringResource(R.string.update), 1)
-                CardDemo(stringResource(R.string.update), 1)
-                CardDemo(stringResource(R.string.finger_face), 0)
+                MyApp()
             }
         }
     }
-}
-
-@Composable
-fun CardDemo(text: String, option: Int) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 15.dp)
-            .padding(end = 15.dp)
-            .padding(top = 2.dp)
-            .padding(bottom = 0.dp)
-            .clickable { }
-            .height(50.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = White,
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 2.dp
-        ),
-        shape = RoundedCornerShape(0)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Row(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .padding(top = 0.dp)
-                    .padding(bottom = 0.dp)
-                    .padding(start = 8.dp)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ){
-                Text(
-                    text = text,
-                    color = Color.Black,
-                    textAlign = TextAlign.Center,
-                    fontSize = 16.sp,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-                if(option==1){
-                    Icon(
-                        imageVector = Icons.Default.KeyboardArrowRight,
-                        contentDescription = null,
-                        tint = mainSv,
-                        modifier = Modifier.size(30.dp)
-                    )
-                }else if(option == 0){
-                    SwitchMinimalExample()
-                }
-
-            }
-        }
-    }
-}
-
-@Composable
-fun TextOptions(text: String){
-    Text(
-        text = text,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-        color = Black,
-        fontSize = 16.sp,
-        modifier = Modifier
-            .padding(start = 16.dp)
-            .padding(top = 8.dp)
-            .padding(bottom = 8.dp)
-    )
-}
-
-@Composable
-fun SwitchMinimalExample() {
-    var checked by remember { mutableStateOf(true) }
-
-    Switch(
-        checked = checked,
-        onCheckedChange = {
-            checked = it
-        }
-    )
-}
-
-
-
-
-
-
-private fun mToast(context: Context, text: String){
-    Toast.makeText(context, text.toString(), Toast.LENGTH_LONG).show()
 }
